@@ -1,8 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.AffirMagic" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/primary</item>
+        <!-- Secondary brand color. -->
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?android:attr/colorPrimary</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <!-- Customize your theme here. -->
+
     </style>
 
     <style name="Theme.AffirMagic" parent="Base.Theme.AffirMagic" />
