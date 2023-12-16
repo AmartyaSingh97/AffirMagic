@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.affirmagic.databinding.FragmentHomeBinding
 import com.example.affirmagic.fragments.adapters.AffirmationsAdapter
 import com.example.affirmagic.utils.Resource
@@ -22,8 +22,10 @@ import java.time.format.DateTimeFormatter
 class HomeFragment : Fragment() {
 
     private var binding: FragmentHomeBinding by autoCleared()
-    private val viewModel: AffirmationsViewModel by viewModels()
+    private lateinit var viewModel: AffirmationsViewModel
     private lateinit var adapter: AffirmationsAdapter
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +39,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        setObservers()
     }
 
     private fun setObservers() {
@@ -52,12 +53,15 @@ class HomeFragment : Fragment() {
         val formatter = DateTimeFormatter.BASIC_ISO_DATE
         val formatted = current.format(formatter)
 
+        viewModel = ViewModelProvider(this)[AffirmationsViewModel::class.java]
+
         viewModel.getAffirmations(formatted).observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
-                    binding.progressBar.visibility = View.GONE
+                    setObservers()
                     it.data?.let { affirmations -> adapter.setAffirmationItems(affirmations) }
                     binding.recyclerView.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
                 }
 
                 Resource.Status.LOADING -> {
