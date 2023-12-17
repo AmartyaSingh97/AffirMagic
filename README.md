@@ -17,3 +17,11 @@ Libraries and architecture used: -
 ![WhatsApp Image 2023-12-17 at 17 22 46_33cc5177](https://github.com/AmartyaSingh97/AffirMagic/assets/85061899/d53e7e32-6709-4e1d-84e7-40ce57923a5f)
 
 ![WhatsApp Image 2023-12-17 at 17 22 47_b2769e6a](https://github.com/AmartyaSingh97/AffirMagic/assets/85061899/94c31f0e-ca18-40a9-be9b-aca0c9cc9c0b)
+
+
+## Found this repository useful? :heart:
+Support it by joining __[stargazers](https://github.com/AmartyaSingh97/AffirMagic/stargazers)__ for this repository. :star: <br>
+Also, __[follow me](https://github.com/AmartyaSingh97)__ on GitHub for my next creations! 🤩
+
+## Visitors Count
+<img align="left" src = "https://profile-counter.glitch.me/AffirMagic/count.svg" alt ="Loading">
