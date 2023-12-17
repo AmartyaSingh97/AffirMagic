@@ -8,9 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.example.affirmagic.databinding.FragmentHomeBinding
 import com.example.affirmagic.fragments.adapters.AffirmationsAdapter
+import com.example.affirmagic.utils.ModalBottomSheet
 import com.example.affirmagic.utils.Resource
 import com.example.affirmagic.utils.autoCleared
 import com.example.affirmagic.viewmodel.AffirmationsViewModel
@@ -23,7 +24,7 @@ import java.time.format.DateTimeFormatter
 class HomeFragment : Fragment() {
 
     private var binding: FragmentHomeBinding by autoCleared()
-    private lateinit var viewModel: AffirmationsViewModel
+    private val viewModel: AffirmationsViewModel by viewModels()
     private lateinit var adapter: AffirmationsAdapter
     private var today = LocalDateTime.now()
 
@@ -35,7 +36,6 @@ class HomeFragment : Fragment() {
          binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         setObservers()
-        viewModel = ViewModelProvider(this)[AffirmationsViewModel::class.java]
 
         setupRecyclerView(today)
 
@@ -50,10 +50,16 @@ class HomeFragment : Fragment() {
             }
         }
 
+
         return binding.root
     }
     private fun setObservers() {
-        adapter = AffirmationsAdapter()
+        adapter = AffirmationsAdapter{
+            affirmationsEntity ->
+
+            val modalBottomSheet = ModalBottomSheet(requireContext(),affirmationsEntity)
+            modalBottomSheet.show(parentFragmentManager, ModalBottomSheet.TAG)
+        }
         binding.recyclerView.adapter = adapter
     }
 

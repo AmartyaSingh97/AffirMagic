@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.affirmagic.databinding.ItemAffirmationsLayoutBinding
 import com.example.affirmagic.db.entity.AffirmationsEntity
 
-class AffirmationsAdapter() : RecyclerView.Adapter<AffirmationsAdapter.ViewHolder>() {
+class AffirmationsAdapter(private val onItemButtonClick : (AffirmationsEntity) -> Unit) : RecyclerView.Adapter<AffirmationsAdapter.ViewHolder>() {
 
     private var affirmations = listOf<AffirmationsEntity>()
 
@@ -16,11 +16,13 @@ class AffirmationsAdapter() : RecyclerView.Adapter<AffirmationsAdapter.ViewHolde
         fun bind(item: AffirmationsEntity)= binding.apply {
             title.text = item.themeTitle
             Glide.with(itemView)
-                .load(item.bgImageUrl).centerCrop().
+                .load(item.dzImageUrl).centerCrop().dontAnimate().
                 into(image)
+            shareBtn.setOnClickListener {
+                onItemButtonClick(item)
+            }
         }
     }
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
